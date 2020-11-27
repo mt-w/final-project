@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import CartItem from "../components/CartItem";
-import {fetchCaughtPokemon} from "../redux/actions/pokemon";
+import { fetchCaughtPokemon } from "../redux/actions/pokemon";
 
 function Cart() {
   const dispatch = useDispatch();
@@ -15,11 +15,10 @@ function Cart() {
   const totalCount = caughtItems.length;
   return (
     <div className="container container--cart">
-      {isLoaded ? (
+      {isLoaded && caughtItems.length ? (
         <div className="cart">
           <div className="cart__top">
             <h2 className="content__title">Caught pokemon</h2>
-
           </div>
           <div className="content__items">
             {caughtItems.map((obj) => (
