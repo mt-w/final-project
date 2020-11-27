@@ -22,12 +22,13 @@ export const setPokemon = (items) => ({
   payload: items,
 });
 
-export const showPokemon = (id) => (dispatch) => {
+export const fetchCardPokemon = (id) => (dispatch) => {
   dispatch({ type: "SET_LOADED", payload: false });
   axios.get(`http://localhost:3001/pokemon/${id}`).then(({ data }) => {
     dispatch(setPokemon(data));
   });
 };
+
 export const fetchCaughtPokemon = () => (dispatch) => {
   dispatch({ type: "SET_LOADED", payload: false });
   axios.get(`http://localhost:3001/pokemon?caught=true`).then(({ data }) => {
