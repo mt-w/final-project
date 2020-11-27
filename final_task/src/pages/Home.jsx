@@ -1,61 +1,38 @@
 import React from "react";
 import Button from "../components/Button";
-import {
-  PokemonBlock,
-  PokemonLoadingBlock,
-} from "../components";
+import { PokemonBlock, PokemonLoadingBlock } from "../components";
 import { useDispatch, useSelector } from "react-redux";
-
 import { fetchPokemon } from "../redux/actions/pokemon";
-import {incrementPageNumber} from "../redux/actions/page";
-
 
 function Home() {
   const dispatch = useDispatch();
 
-  const items = useSelector(({ pokemon }) => pokemon.items);
-  const isLoaded = useSelector(({ pokemon }) => pokemon.isLoaded);
-  const cartItems = useSelector(({ pokemon }) => pokemon.items);
-  const page = useSelector(({ page }) => page.page);
-  const isPageLoaded = useSelector(({ page }) => page.isPageLoaded);
-  const isLastPage = useSelector(({ page }) => page.isLastPage);
-  const isFirstPage = useSelector(({ page }) => page.isFirstPage);
+  const { items, isLoaded } = useSelector(({ pokemon }) => pokemon);
+  const { page, isFirstPage, isPageLoaded, isLastPage } = useSelector(
+    ({ page }) => page
+  );
 
   React.useEffect(() => {
-    dispatch(fetchPokemon( page));
+    dispatch(fetchPokemon(page));
   }, []);
 
-
   const loadMore = () => {
-    dispatch(incrementPageNumber());
-    dispatch(fetchPokemon(page+1));
+    dispatch({ type: "INCREMENT_PAGE_NUMBER" });
+    dispatch(fetchPokemon(page + 1));
   };
 
   const back = () => {
     dispatch({ type: "DECREMENT_PAGE_NUMBER" });
-    dispatch(fetchPokemon(page-1));
-  };
-
-  const handleAddPokemonToCart = (obj) => {
-    dispatch({
-      type: "ADD_POKEMON_CART",
-      payload: obj,
-    });
+    dispatch(fetchPokemon(page - 1));
   };
 
   return (
     <div className="container">
       <h2 className="content__title">All pokemon</h2>
       <div className="content__items">
-        {isLoaded&&items.length
+        {isLoaded && items.length && isPageLoaded
           ? items.map((obj) => (
-              <PokemonBlock
-                onClickAddPokemon={handleAddPokemonToCart}
-                key={obj.id}
-                caught={obj.caught}
-                addedCount={cartItems[obj.id] && cartItems[obj.id].length}
-                {...obj}
-              />
+              <PokemonBlock key={obj.id} caught={obj.caught} {...obj} />
             ))
           : Array(12)
               .fill(0)
