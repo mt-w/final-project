@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { showPokemon, catchPokemon } from "../redux/actions/pokemon";
+import { fetchCardPokemon, catchPokemon } from "../redux/actions/pokemon";
 import PokemonInfo from "../components/PokemonBlock/PokemonInfo";
 import Button from "../components/Button";
 
@@ -13,7 +13,7 @@ const Card = ({ match}) => {
   const items = useSelector(({ pokemon }) => pokemon.items);
 
   React.useEffect(() => {
-    dispatch(showPokemon(id));
+    dispatch(fetchCardPokemon(id));
   }, []);
 
   const handleAddPokemonToCart = (obj) => {
@@ -27,9 +27,7 @@ const Card = ({ match}) => {
 
     <div className="container container--card">
       <PokemonInfo
-        onClickAddPokemon={handleAddPokemonToCart}
         key={items.id}
-        caught={items.caught}
         {...items}
       />
       <div className="pokemon-block__bottom">
