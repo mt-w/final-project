@@ -1,7 +1,6 @@
 @import "fonts";
 @import "variables";
 @import "libs/normalize";
-
 @import "components/all";
 
 body {
@@ -40,22 +39,21 @@ body {
     display: flex;
     justify-content: space-between;
     padding: 30px;
-    .button--add{
+    .button--add {
       display: flex;
       align-items: center;
     }
-    .button--loadMore{
+    .button--loadMore {
       margin-left: auto;
     }
     .arrow-right,
-    .arrow-left{
+    .arrow-left {
       margin: 2px 8px;
       width: 30px;
       height: 30px;
     }
     .arrow-left path,
-    .arrow-right path,
-     {
+    .arrow-right path {
       fill: #fff;
       transition: fill 0.5s ease-out;
       cursor: pointer;
@@ -65,10 +63,10 @@ body {
     }
 
     .arrow-left path:hover,
-    .arrow-right path:hover{
+    .arrow-right path:hover {
       fill: #fff;
-      stroke-width: .6;
-      stroke: #423C69;
+      stroke-width: 0.6;
+      stroke: #423c69;
     }
   }
 }
@@ -85,19 +83,19 @@ body {
     }
   }
 
-  &--card{
+  &--card {
     display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    .pokemon-block{
+    .pokemon-block {
       width: 340px;
       margin-right: 0;
     }
-    .pokemon-block__image{
+    .pokemon-block__image {
       width: 340px;
     }
-    .pokemon-block__title{
+    .pokemon-block__title {
       font-size: 34px;
     }
   }
@@ -161,6 +159,7 @@ body {
 
   &__item {
     display: flex;
+    justify-content: space-around;
     width: 100%;
     border-top: 1px solid $gray-line;
     padding-top: 30px;
@@ -361,5 +360,33 @@ body {
       font-weight: 600;
       font-size: 18px;
     }
+  }
+}
+
+@media only screen and (max-width: 510px) {
+  .wrapper {
+    width: 100%;
+    margin: 0;
+  }
+  .pokemon-block {
+    margin: 20px 5px;
+    .pokemon-block__image {
+      width: 160px;
+    }
+  }
+  .container--card {
+    .pokemon-block__image {
+      width: 200px;
+    }
+  }
+  .container--cart {
+    margin: 0 0 0 8px;
+  }
+
+  .content__bottom .button--loadMore {
+    margin-left: 20px;
+  }
+  .content__bottom .arrow-right {
+    width: 12px;
   }
 }
